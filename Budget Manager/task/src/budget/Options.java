@@ -5,5 +5,4 @@ enum Options {
     CLOTHES,
     ENTERTAINMENT,
     OTHER,
-    ALL
 }

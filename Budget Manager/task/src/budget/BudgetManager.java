@@ -11,6 +11,7 @@ public class BudgetManager {
 
     final static Scanner scan = new Scanner(System.in);
     private CategoriesManager categories = new CategoriesManager();
+    private FileManager fileManager = new FileManager(categories);
     private boolean exit = false;
 
     public void startSystem() {
@@ -31,6 +32,12 @@ public class BudgetManager {
                 case "4":
                     showBalance();
                     break;
+                case "5":
+                    fileManager.saveToFile();
+                    break;
+                case "6":
+                    fileManager.loadFromFile();
+                    break;
                 case "0":
                     exit();
                     break;
@@ -45,7 +52,7 @@ public class BudgetManager {
     private void printMenu() {
         System.out.println("Choose your action:\n" + "1) Add income\n" +
                 "2) Add purchase\n" + "3) Show list of purchases\n" +
-                "4) Balance\n" + "0) Exit");
+                "4) Balance\n" + "5) Save\n" + "6) Load\n" + "0) Exit");
     }
 
     private void printAddPurchaseMenu() {

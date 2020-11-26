@@ -60,7 +60,7 @@ public class CategoriesManager {
 
     }
 
-    private Map<String, Float> getPertinentList(Options val) {
+    public Map<String, Float> getPertinentList(Options val) {
         if (val == Options.FOOD) {
             header = "Food:";
             return food;
@@ -106,7 +106,12 @@ public class CategoriesManager {
         return balance;
     }
 
+    public void setBalance(float val) {
+        balance = val;
+    }
+
     public void addBalance(float income) {
         this.balance += income;
     }
+
 }
