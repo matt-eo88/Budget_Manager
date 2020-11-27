@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class saves/loads data from/to file
+ */
 public class FileManager {
 
     private CategoriesManager categories;
@@ -17,11 +20,11 @@ public class FileManager {
     }
 
     public void saveToFile() {
-        saveBalance();
+        saveBalance(); // saves the balance first
         for (Options opt : options) {
 
-            String path = determinePath(opt);
-            Map<String, Float> val = categories.getPertinentList(opt);
+            String path = determinePath(opt); // creates file name based on category
+            Map<String, Float> val = categories.getPertinentList(opt); // gets the pertinent in memory data
             if (val.isEmpty()) {
                 continue;
             }
@@ -50,27 +53,25 @@ public class FileManager {
     }
 
     public void loadFromFile() {
-        loadBalance();
+        loadBalance(); // loads balance first
         for (Options opt : options) {
-            String path = determinePath(opt);
-            Map<String, Float> val = categories.getPertinentList(opt);
+            String path = determinePath(opt); // creates file name based on category
+            Map<String, Float> val = categories.getPertinentList(opt); // returns pertinent list
 
             try {
 
                 File file = new File("purchases/" + path + ".txt");
                 if (file.exists()) {
                     BufferedReader buffer = new BufferedReader(new FileReader(file));
-                    String content = buffer.readLine();
-                    String[] parts = new String[2];
-                    if (content != null) {
-                        parts = content.split(":");
-                    }
-                    while (content != null) {
+
+                    String content;
+                    while ((content = buffer.readLine()) != null) {
+                        String[] parts = content.split(":");
                         String key = parts[0];
                         float value = Float.parseFloat(parts[1]);
                         val.put(key, value);
-                        content = buffer.readLine();
                     }
+
                     buffer.close();
                 }
 
@@ -82,6 +83,12 @@ public class FileManager {
         System.out.println("Purchases were loaded!\n");
     }
 
+    /**
+     * Creates file name based on passed category
+     *
+     * @param opt = enum
+     * @return = String
+     */
     private String determinePath(Options opt) {
         String path;
         if (opt == Options.FOOD) {

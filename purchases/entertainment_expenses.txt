@@ -1,0 +1,3 @@
+cinema:200.0
+dvd rental:11.0
+bowling:33.50

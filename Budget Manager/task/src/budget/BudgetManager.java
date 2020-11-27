@@ -7,6 +7,11 @@ import static budget.Options.CLOTHES;
 import static budget.Options.ENTERTAINMENT;
 import static budget.Options.OTHER;
 
+/**
+ * This class shows the relevant info to the user
+ * it also gets user input and passes it on to the
+ * CategoryManager class
+ */
 public class BudgetManager {
 
     final static Scanner scan = new Scanner(System.in);
@@ -146,7 +151,7 @@ public class BudgetManager {
 
     private void showBalance() {
         System.out.println();
-        System.out.println("Balance: $" + categories.getBalance());
+        System.out.println("Balance: £" + categories.getBalance());
         System.out.println();
     }
 

@@ -1,0 +1,4 @@
+sweater:33.0
+jumper:28.0
+shoes:150.0
+scarf:50.0

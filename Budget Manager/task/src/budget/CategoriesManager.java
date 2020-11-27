@@ -4,6 +4,10 @@ import java.util.*;
 
 import static budget.BudgetManager.scan;
 
+/**
+ * This class is responsible for sorting and retrieving the
+ * data entered by the user
+ */
 public class CategoriesManager {
 
     private Map<String, Float> food = new HashMap<>();
@@ -15,7 +19,7 @@ public class CategoriesManager {
     private float balance = 0.0f;
     private String header;
 
-    public CategoriesManager() {
+    CategoriesManager() {
         allPurchases.add(food);
         allPurchases.add(clothes);
         allPurchases.add(entertainment);
@@ -54,44 +58,59 @@ public class CategoriesManager {
             System.out.println("Purchase list is empty");
             return;
         }
-        System.out.println(header);
-        purchases.forEach((k, v) -> System.out.println(k + " $" + v));
-        System.out.println("Total sum: $" + getTotalSum(purchases.values()));
 
+        System.out.println("====== " + header + " =================================================");
+        purchases.forEach((k, v) -> System.out.println(k + " £" + v));
+        System.out.println("=============================================================");
+        System.out.println("Total sum: £" + getTotalSum(purchases.values()));
+        System.out.println("=============================================================");
     }
 
+    /**
+     * Returns the list to which data will saved based on the passed
+     * category. It will also set the header to be printed out when
+     * listing purchases
+     *
+     * @param val = enum
+     * @return = HashMap
+     */
     public Map<String, Float> getPertinentList(Options val) {
         if (val == Options.FOOD) {
-            header = "Food:";
+            header = "FOOD";
             return food;
         }
         if (val == Options.CLOTHES) {
-            header = "Clothes:";
+            header = "CLOTHES";
             return clothes;
         }
         if (val == Options.ENTERTAINMENT) {
-            header = "Entertainment:";
+            header = "ENTERTAINMENT";
             return entertainment;
         }
         if (val == Options.OTHER) {
-            header = "Other:";
+            header = "OTHER";
             return other;
         }
 
         return new HashMap<>();
     }
 
+    /**
+     * Prints all purchases from every category
+     */
     public void printAllPurchases() {
         System.out.println();
-        System.out.println("All:");
+        System.out.println("====== ALL =================================================");
         float total = 0.0f;
         for (Map<String, Float> val : allPurchases) {
             if (!val.isEmpty()) {
-                val.forEach((k, v) -> System.out.println(k + " $" + v));
+                val.forEach((k, v) -> System.out.println(k + " £" + v));
             }
             total += getTotalSum(val.values());
         }
-        System.out.println("Total sum: $" + total);
+        System.out.println("=============================================================");
+        System.out.println("Total sum: £" + total);
+        System.out.println("=============================================================");
     }
 
     private float getTotalSum(Collection<Float> amounts) {
